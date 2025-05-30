@@ -1,6 +1,6 @@
 # RAG [Chat with PDF]
 
-![RAG Chat with PDF Logo](./logo.svg)
+![Uploading diagram-export-30-05-2025-21_02_36.svg…]()
 
 ## 🛠 Tech Stack
 
