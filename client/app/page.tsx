@@ -1,12 +1,14 @@
-import Image from "next/image";
+import FileUploadComponent from "./components/file-upload";
 
 export default function Home() {
   return (
-   <div>
+    <div>
       <div className="min-h-screen w-screen flex">
-        <div className="w-[30vw] min-h-screen">1</div>
+        <div className="w-[30vw] min-h-screen flex items-center justify-center">
+          <FileUploadComponent />
+        </div>
         <div className="w-[70vw] min-h-screen border-l-2">2</div>
       </div>
-   </div>
+    </div>
   );
 }
