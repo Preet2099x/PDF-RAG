@@ -3,44 +3,39 @@ import * as React from 'react';
 import { Upload } from 'lucide-react';
 
 const FileUploadComponent: React.FC = () => {
+  const handleFileUploadButtonClick = () => {
+    const el = document.createElement('input');
+    el.setAttribute('type', 'file');
+    el.setAttribute('accept', 'application/pdf');
+    el.addEventListener('change', async (ev) => {
+      if (el.files && el.files.length > 0) {
+        const file = el.files.item(0);
+        if (file) {
+          const formData = new FormData();
+          formData.append('pdf', file);
 
-    const HandleFileUpload = ()=> {
-        
-        const el = document.createElement('input')
-        el.setAttribute('type','file')
-        el.setAttribute('accept','application/pdf')
-        el.addEventListener('change',async (ev) => {
-            if(el.files && el.files.length>0) {
+          await fetch('http://localhost:8000/upload/pdf', {
+            method: 'POST',
+            body: formData,
+          });
+          console.log('File uploaded');
+        }
+      }
+    });
+    el.click();
+  };
 
-                const file = el.files.item(0)
-                
-                if (file) {
-                    const formData = new FormData()
-                    formData.append('pdf',file) 
-
-                    await fetch('http://localhost:8000/upload/pdf',{
-                        method: 'POST',
-                        body: formData
-                    }) 
-                }
-
-                // console.log(el.files)
-            }
-        })
-        el.click()
-
-
-    }
-
-
-    return (
-        <div className="w-40 h-40 bg-slate-900 text-white shadow-xl rounded-lg border-2 border-white flex items-center justify-center">
-            <button onClick={HandleFileUpload} className="flex flex-col items-center justify-center space-y-1 focus:outline-none">
-                <Upload className="w-8 h-8 text-white" />
-                <span className="text-xs font-medium">Upload PDF File</span>
-            </button>
-        </div>
-    );
+  return (
+    <div className="bg-slate-900 text-white shadow-2xl flex justify-center items-center p-4 rounded-lg border-white border-2">
+      <div
+        onClick={handleFileUploadButtonClick}
+        className="flex justify-center items-center flex-col"
+      >
+        <h3>Upload PDF File</h3>
+        <Upload />
+      </div>
+    </div>
+  );
 };
 
 export default FileUploadComponent;
