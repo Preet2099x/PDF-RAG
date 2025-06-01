@@ -1,13 +1,64 @@
-# RAG [Chat with PDF]
-![diagram-export-30-05-2025-21_03_34](https://github.com/user-attachments/assets/3c83d2ab-e123-447e-b895-d73ec52b7079)
+📚 PDF-RAG
+An AI-powered PDF question-answering app that lets you upload PDFs and chat with their content intelligently using embeddings and retrieval-augmented generation (RAG).
 
+🛠 Tech Stack
+Frontend
+⚛️ Next.js (React Framework)
 
+📝 TypeScript (Typed JavaScript)
 
-## 🛠 Tech Stack
+🎨 Tailwind CSS (Utility-first styling)
 
-**Frontend:**  
-- **Framework:** Next.js  
-- **Language:** TypeScript  
-- **Icons:** Lucide React  
-- **Authentication:** Clerk (Login/Signup handling)  
-- **Styling:** Tailwind CSS  
+🔐 Clerk (Authentication: Login/Signup)
+
+🎭 Lucide React (Icons)
+
+Backend
+🟢 Node.js (JavaScript runtime, ES Modules)
+
+🚂 Express.js (Web framework)
+
+📄 pdf-parse (PDF text extraction)
+
+⚙️ BullMQ (Job queue for async tasks)
+
+🧠 Langchain (Embeddings, NLP utilities)
+
+@langchain/community
+
+@langchain/core
+
+@langchain/openai
+
+@langchain/qdrant
+
+@langchain/textsplitters
+
+📦 Multer (File uploads)
+
+🌐 node-fetch (HTTP requests)
+
+🔐 dotenv (Environment variables)
+
+🌍 cors (Cross-Origin Resource Sharing)
+
+🚀 Features
+Upload PDFs and parse their content
+
+Generate semantic embeddings of documents
+
+Store embeddings in vector DB (Qdrant)
+
+Answer questions based on uploaded PDF content
+
+Authentication-protected user access
+
+Scalable async processing with BullMQ
+
+📂 Project Structure
+frontend/ — Next.js + Clerk + UI
+
+server/ — Express backend with workers handling PDF parsing and embedding
+
+.env — API keys and sensitive config
+
