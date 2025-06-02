@@ -1,64 +1,21 @@
-📚 PDF-RAG
-An AI-powered PDF question-answering app that lets you upload PDFs and chat with their content intelligently using embeddings and retrieval-augmented generation (RAG).
+# PDF-RAG Chatbot using Hugging Face + Qdrant
 
-🛠 Tech Stack
-Frontend
-⚛️ Next.js (React Framework)
+🧠 A local Retrieval-Augmented Generation chatbot that:
+- Accepts PDF uploads
+- Embeds content into Qdrant vector store
+- Uses Hugging Face models for chat generation
+- Queues jobs via Redis/BullMQ
 
-📝 TypeScript (Typed JavaScript)
+## 🛠 Stack
+- Node.js + Express
+- Qdrant (local)
+- Redis + BullMQ
+- Hugging Face Transformers API
 
-🎨 Tailwind CSS (Utility-first styling)
+## 🔧 Run Locally
 
-🔐 Clerk (Authentication: Login/Signup)
-
-🎭 Lucide React (Icons)
-
-Backend
-🟢 Node.js (JavaScript runtime, ES Modules)
-
-🚂 Express.js (Web framework)
-
-📄 pdf-parse (PDF text extraction)
-
-⚙️ BullMQ (Job queue for async tasks)
-
-🧠 Langchain (Embeddings, NLP utilities)
-
-@langchain/community
-
-@langchain/core
-
-@langchain/openai
-
-@langchain/qdrant
-
-@langchain/textsplitters
-
-📦 Multer (File uploads)
-
-🌐 node-fetch (HTTP requests)
-
-🔐 dotenv (Environment variables)
-
-🌍 cors (Cross-Origin Resource Sharing)
-
-🚀 Features
-Upload PDFs and parse their content
-
-Generate semantic embeddings of documents
-
-Store embeddings in vector DB (Qdrant)
-
-Answer questions based on uploaded PDF content
-
-Authentication-protected user access
-
-Scalable async processing with BullMQ
-
-📂 Project Structure
-frontend/ — Next.js + Clerk + UI
-
-server/ — Express backend with workers handling PDF parsing and embedding
-
-.env — API keys and sensitive config
-
+```bash
+git clone https://github.com/yourname/pdf-rag-chatbot
+cd pdf-rag-chatbot/server
+npm install
+node index.js
