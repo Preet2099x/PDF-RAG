@@ -28,4 +28,10 @@ This project enables:
 - 🎧 Assist support teams in accessing product manuals and FAQs through natural language queries.
 - ⚖️ Help legal professionals query contracts and case files efficiently with conversational AI.
 
+---
+
+
+
+
+
 
