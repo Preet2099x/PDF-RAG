@@ -19,6 +19,34 @@ This project enables:
 
 
 ---
+## 🛠️ Tech Stack
+
+### Languages  
+- TypeScript (in frontend)
+- JavaScript (in backend)
+
+### Frameworks & Libraries  
+
+- **Next.js** – React framework for building the frontend UI  
+- **Clerk** – Authentication and user management service  
+- **shadcn/ui** – Component library for building polished UI elements  
+
+- **Express** – Node.js web framework for backend API  
+- **BullMQ** – Job queue with Redis for background processing  
+- **Multer** – Middleware for handling file uploads (PDFs)  
+- **LangChain** – Responsible for loading PDF documents, extracting and preprocessing text, and intelligently chunking content for embedding and retrieval.  
+
+### Databases & Storage  
+- **Qdrant** – Vector similarity search database for storing embeddings  
+- **Redis** – In-memory data store used by BullMQ for job queue  
+- Local file system (`uploads/` folder) – Temporary storage for PDFs  
+
+### APIs & External Services  
+- **Hugging Face Inference API** – Embeddings generation via sentence-transformers  
+- **Google Gemini API** – LLM for generating context-aware answers  
+
+---
+
 
 ## 🚀 Potential Use Cases
 
