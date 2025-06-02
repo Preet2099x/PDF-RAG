@@ -3,7 +3,6 @@ import cors from 'cors';
 import multer from 'multer';
 import fetch from 'node-fetch'; // npm install node-fetch
 import { Queue } from 'bullmq';
-import { QdrantVectorStore } from '@langchain/qdrant';
 import 'dotenv/config';
 
 const queue = new Queue('file-upload-queue', {
@@ -41,66 +40,41 @@ app.post('/upload/pdf', upload.single('pdf'), async (req, res) => {
 app.get('/chat', async (req, res) => {
   try {
     const userQuery = req.query.message;
-    if (!userQuery)
-      return res.status(400).json({ error: 'Message query param required' });
+    if (!userQuery) return res.status(400).json({ error: 'Message query param required' });
 
-    // TODO: Replace this dummy context with real context from your vector store retriever
+    // Dummy placeholder — replace with real vector search result
     const contextDocs = [`Dummy context for query: ${userQuery}`];
-
     const contextText = contextDocs.join('\n');
 
-    const prompt = `
-You are a helpful AI assistant. Use the following context extracted from documents to answer the user's query.
+    const prompt = `You are a helpful AI assistant. Use the following context extracted from documents to answer the user's query.\n\nContext:\n${contextText}\n\nQuestion: ${userQuery}\n\nAnswer:`;
 
-Context:
-${contextText}
+    const GEMINI_API_KEY = 'AIzaSyAsvuJ4EiX-rM5Vng3xFuJk5ONADl1_2Ro';
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-Question: ${userQuery}
-
-Answer:
-`;
-
-    // Use a working Hugging Face model API endpoint here, e.g., "tiiuae/falcon-7b-instruct" or other text-generation model
-    const HF_API_URL = 'https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct';
-    const HF_API_KEY = process.env.HUGGINGFACE_API_KEY;
-
-    const hfResponse = await fetch(HF_API_URL, {
+    const response = await fetch(GEMINI_API_URL, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${HF_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        inputs: prompt,
-        parameters: {
-          max_new_tokens: 200,
-          temperature: 0.7,
-          top_p: 0.9,
-          return_full_text: false,
-        },
+        contents: [
+          {
+            parts: [{ text: prompt }],
+          },
+        ],
       }),
     });
 
-    if (!hfResponse.ok) {
-      const errorBody = await hfResponse.text();
-      throw new Error(`Hugging Face API error: ${hfResponse.status} ${errorBody}`);
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`Gemini API error: ${response.status} ${errorBody}`);
     }
 
-    const hfData = await hfResponse.json();
-
-    // Falcon and similar models usually return array with generated_text property
-    // Fallback if undefined
-    let answer = '';
-    if (Array.isArray(hfData) && hfData.length > 0) {
-      answer = hfData[0].generated_text ?? '';
-      // Remove the prompt from the generated text if it is included
-      if (answer.startsWith(prompt)) {
-        answer = answer.slice(prompt.length).trim();
-      }
-    }
+    const data = await response.json();
+    const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No answer generated.';
 
     res.json({
-      message: answer,
+      message: answer.trim(),
       docs: contextDocs,
     });
   } catch (error) {
