@@ -19,6 +19,10 @@ This project enables:
 
 
 ---
+## 🖥️ Architecture
+
+![diagram-export-02-06-2025-09_23_41](https://github.com/user-attachments/assets/01be4ab4-4b02-410a-a414-a7317efa70cb)
+---
 ## 🛠️ Tech Stack
 
 ### Languages  
