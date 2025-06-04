@@ -92,9 +92,11 @@ app.get('/chat', async (req, res) => {
 
     // Connect to your existing Qdrant collection
     const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddings, {
-      url: 'http://localhost:6333',
+      url: 'https://85a09390-5455-4b6c-a8aa-0b527bb851b0.us-west-2-0.aws.cloud.qdrant.io',
+      apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.4UTR81Pwh3_vyEIObjQn_uRIxp7s0mPY-kx2ughRixo',
       collectionName: 'langchainjs-testing',
     });
+
 
     // Get top 2 relevant documents from Qdrant for the user query
     const retriever = vectorStore.asRetriever({ k: 2 });
